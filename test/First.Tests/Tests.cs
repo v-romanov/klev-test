@@ -10,6 +10,7 @@ public sealed class FirstTest
     [DataRow("b3d", "bbbd")]
     [DataRow("pogchamp", "pogchamp")]
     [DataRow("f10", "ffffffffff")]
+    [DataRow("f2d4c", "ffddddc")]
     public void TestMethod1(string expected, string input)
     {
         Assert.AreEqual(expected, LatinCompress.Comporess(input));
