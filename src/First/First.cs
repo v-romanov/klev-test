@@ -12,6 +12,8 @@ public class LatinCompress
     private static Regex ContainOnlyLatin() => new Regex(@"^[a-zA-Z]+$");
 #endif
 
+
+    // Tried to check if input is latin only when TEST_FOR_NON_LATIN is defined
     public static string Comporess(string input)
     {
 #if TEST_FOR_NON_LATIN
@@ -44,7 +46,7 @@ public class LatinCompress
             output += newPart;
         };
 
-        for (var i = 0; i < input.Length; ++i)
+        for (var i = 1; i < input.Length; ++i)
         {
             if (input[i] == current)
             {
@@ -58,6 +60,45 @@ public class LatinCompress
             }
         }
 
+        flushToOutput();
+
+        return output;
+    }
+
+    // Assumed that input is valid comporessed string
+    public static string Decompress(string input)
+    {
+        string output = "";
+        var current = input[0];
+        string number = "";
+
+        var flushToOutput = () =>
+        {
+            if (number == "")
+            {
+                output += current;
+                return;
+            }
+
+            output += new string(current, int.Parse(number));
+        };
+
+
+        for (var i = 1; i < input.Length; ++i)
+        {
+            char character = input[i];
+
+            if (char.IsNumber(character))
+            {
+                number += character;
+            }
+            else
+            {
+                flushToOutput();
+                number = "";
+                current = character;
+            }
+        }
         flushToOutput();
 
         return output;
