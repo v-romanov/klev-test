@@ -2,8 +2,10 @@
   <Folder Name="/src/">
     <Project Path="src/First/First.csproj" />
     <Project Path="src/Second/Second.csproj" />
+    <Project Path="src/Third/Third.csproj" />
   </Folder>
   <Folder Name="/test/">
     <Project Path="test/First.Tests/First.Tests.csproj" />
+    <Project Path="test/Third.Tests/Third.Tests.csproj" />
   </Folder>
 </Solution>

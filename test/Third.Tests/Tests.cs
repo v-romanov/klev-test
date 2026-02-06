@@ -1,0 +1,13 @@
+﻿namespace Third.Tests;
+
+[TestClass]
+public sealed class Tests
+{
+    [TestMethod]
+    [DataRow("2025-03-10 15:14:51.5882| INFO|MobileComputer.GetDeviceId| Код устройства: '@MINDEO-M40-D-410244015546'")]
+    [DataRow("10.03.2025 15:14:49.523 INFORMATION Версия программы: '3.4.0.48729'")]
+    public void CheckValidity(string input)
+    {
+        Assert.IsTrue(LogFormater.FormatLog(input, out _));
+    }
+}

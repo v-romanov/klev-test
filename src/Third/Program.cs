@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Reflection.Metadata;
+using System.Xml;
 
 namespace Third;
 
@@ -82,7 +83,7 @@ public static class LogFormater
         }
 
         var method = splitted[2].Trim();
-        var message = string.Join(' ', splitted[3..]).Trim();
+        var message = string.Join('|', splitted[3..]).Trim();
 
         output = FinalOutput(date, level, method, message);
         return true;
@@ -94,10 +95,21 @@ public static class Ulala
 {
     public static void Main()
     {
-        Console.WriteLine(LogFormater.FormatLog("2025-03-10 15:14:51.5882| INFO|MobileComputer.GetDeviceId| Код устройства: '@MINDEO-M40-D-410244015546'", out string output));
-        Console.WriteLine(LogFormater.FormatLog("10.03.2025 15:14:49.523 INFORMATION Версия программы: '3.4.0.48729'", out string output2));
+        var lines = File.ReadAllLines("./txts/input.txt");
 
-        Console.WriteLine(output);
-        Console.WriteLine(output2);
+        using var output = new StreamWriter("./txts/output.txt");
+        using var problems = new StreamWriter("./txts/problems.txt");
+
+        foreach (var line in lines)
+        {
+            if (LogFormater.FormatLog(line, out string formatted))
+            {
+                output.WriteLine(formatted);
+            }
+            else
+            {
+                problems.WriteLine(line);
+            }
+        }
     }
 }
