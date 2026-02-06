@@ -31,13 +31,13 @@ public static class LogFormater
     private static bool FormatFirstLog(DateTime date, string input, out string output)
     {
         output = "";
-        return true;
+        return false;
     }
 
     private static bool FormatSecondLog(DateTime date, string input, out string output)
     {
         output = "";
-        return false;
+        return true;
     }
 }
 
